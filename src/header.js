@@ -1,5 +1,9 @@
 import React from 'react'
 import './header.css'
+import { useDispatch } from "react-redux";
+import { auth } from './firebase.js';
+import { signOut } from "firebase/auth";
+import { logout } from "./features/userSlice";
 import SearchIcon from '@mui/icons-material/Search';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
@@ -10,7 +14,15 @@ import HeaderOption from './HeaderOption.js';
 
 
 
-function header() {
+function Header() {
+
+    const dispatch = useDispatch();
+
+    const logoutOfApp = () => {
+        dispatch(logout());
+        signOut(auth);
+    }
+
     return (
         <div className="header">
             <div className="header__left">
@@ -29,7 +41,7 @@ function header() {
                 <HeaderOption title="Jobs" Icon={BusinessCenterRoundedIcon} />
                 <HeaderOption title="Messaging" Icon={ChatRoundedIcon} />
                 <HeaderOption title="Notifications" Icon={NotificationsRoundedIcon} />
-                <HeaderOption title="Profile" avatar="https://pngimg.com/uploads/arctic_fox/arctic_fox_PNG41385.png" />
+                <HeaderOption title="Profile" avatar="https://pngimg.com/uploads/arctic_fox/arctic_fox_PNG41385.png" onClick={logoutOfApp} />
             </div>
             
             
@@ -38,4 +50,4 @@ function header() {
     )
 }
 
-export default header
+export default Header
