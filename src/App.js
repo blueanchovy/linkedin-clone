@@ -19,12 +19,12 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+    onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         // User is signed in
         dispatch(login({
                 email: authUser.email,
-                uid: authUser.id,
+                uid: authUser.uid,
                 displayName: authUser.name,
                 photoUrl: authUser.profilePic
         }));
@@ -35,10 +35,7 @@ function App() {
       }
     })
 
-    return () => {
-      unsubscribe();
-    }
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="app">

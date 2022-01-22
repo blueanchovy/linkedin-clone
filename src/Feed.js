@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './Feed.css'
 import Post from './Post.js'
+import { useSelector } from 'react-redux';
+import { selectUser } from "./features/userSlice";
 import InputOption from './InputOption.js';
 import CreateIcon from '@mui/icons-material/Create';
 import ImageIcon from '@mui/icons-material/Image';
@@ -11,6 +13,8 @@ import { db } from './firebase.js';
 import { query, orderBy, collection, onSnapshot, addDoc, serverTimestamp } from "firebase/firestore";
 
 function Feed() {
+
+    const user = useSelector(selectUser);
 
     const [ posts, setPosts ] = useState([]);
     const [ input, setInput ] = useState('');
@@ -32,15 +36,12 @@ function Feed() {
         e.preventDefault();
 
         await addDoc(collection(db, 'posts'), {
-            name : 'Manish',
-            description : 'test',
+            name : user.displayName,
+            description : user.email,
             message : input,
-            photoUrl: '',
+            photoUrl: user?.photoUrl || "",
             timestamp : serverTimestamp()
         });
-
-        
-        
         setInput('');
     })
 

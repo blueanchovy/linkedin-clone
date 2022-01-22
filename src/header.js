@@ -41,7 +41,7 @@ function Header() {
                 <HeaderOption title="Jobs" Icon={BusinessCenterRoundedIcon} />
                 <HeaderOption title="Messaging" Icon={ChatRoundedIcon} />
                 <HeaderOption title="Notifications" Icon={NotificationsRoundedIcon} />
-                <HeaderOption title="Profile" avatar="https://pngimg.com/uploads/arctic_fox/arctic_fox_PNG41385.png" onClick={logoutOfApp} />
+                <HeaderOption title="Me" avatar={true} onClick={logoutOfApp} />
             </div>
             
             

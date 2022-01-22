@@ -20,9 +20,9 @@ function Login() {
         .then((userAuth) => {
             dispatch(login({
                 email: userAuth.user.email,
-                uid: userAuth.user.id,
-                displayName: name,
-                photoUrl: profilePic
+                uid: userAuth.user.uid,
+                displayName: userAuth.user.displayName,
+                photoUrl: userAuth.user.photoUrl
             }))
         })
         .catch((error) => alert(error.message));
@@ -45,9 +45,9 @@ function Login() {
         .then(() => {
             dispatch(login({
                 email: auth.currentUser.email,
-                uid: auth.currentUser.id,
-                displayName: name,
-                photoUrl: profilePic
+                uid: auth.currentUser.uid,
+                displayName: auth.currentUser.name,
+                photoUrl: auth.currentUser.photoUrl,
             }))
         })
         .catch((error) => alert(error.message));
